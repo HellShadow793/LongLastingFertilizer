@@ -1,4 +1,7 @@
-﻿namespace LongLastingFertilizer;
+﻿using System;
+using System.Collections.Generic;
+
+namespace LongLastingFertilizer;
 
 [Serializable]
 public class FertilizerEffect {

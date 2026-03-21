@@ -1,3 +1,10 @@
 <Solution>
-  <Project Path="LongLastingFertilizer/LongLastingFertilizer.csproj" />
+    <Project Path="LongLastingFertilizer/LongLastingFertilizer.csproj"/>
+
+    <Configurations>
+        <BuildType Name="Debug"/>
+        <BuildType Name="IL2CPP"/>
+        <BuildType Name="Mono"/>
+        <BuildType Name="Release"/>
+    </Configurations>
 </Solution>

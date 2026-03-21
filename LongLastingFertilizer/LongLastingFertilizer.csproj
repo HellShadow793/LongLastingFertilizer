@@ -1,23 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <Configurations>Debug;IL2CPP;Mono</Configurations>
         <AssemblyName>LongLastingFertilizer</AssemblyName>
         <RootNamespace>LongLastingFertilizer</RootNamespace>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
+    <!-- IL2CPP builds (Debug is also IL2CPP) -->
+    <PropertyGroup Condition="'$(Configuration)' == 'IL2CPP' Or '$(Configuration)' == 'Debug'">
+        <TargetFramework>net6.0</TargetFramework>
+        <DefineConstants>$(DefineConstants);IL2CPP</DefineConstants>
+    </PropertyGroup>
+
+    <!-- Mono build -->
+    <PropertyGroup Condition="'$(Configuration)' == 'Mono'">
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <DefineConstants>$(DefineConstants);MONO</DefineConstants>
+    </PropertyGroup>
+
+    <!-- Shared references -->
     <ItemGroup>
         <Reference Include="0Harmony" Private="false">
-            <HintPath>$(ScheduleIDir)\MelonLoader\net6\0Harmony.dll</HintPath>
+            <HintPath>$(ScheduleIDir)\MelonLoader\$(MelonNetDir)\0Harmony.dll</HintPath>
         </Reference>
         <Reference Include="MelonLoader" Private="false">
-            <HintPath>$(ScheduleIDir)\MelonLoader\net6\MelonLoader.dll</HintPath>
+            <HintPath>$(ScheduleIDir)\MelonLoader\$(MelonNetDir)\MelonLoader.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule" Private="false">
+            <HintPath>$(ScheduleIDir)\$(AssembliesDir)\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp" Private="false">
-            <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+            <HintPath>$(ScheduleIDir)\$(AssembliesDir)\Assembly-CSharp.dll</HintPath>
         </Reference>
+    </ItemGroup>
+
+    <!-- IL2CPP-only references -->
+    <ItemGroup Condition="'$(Configuration)' == 'IL2CPP' Or '$(Configuration)' == 'Debug'">
         <Reference Include="Il2CppFishNet.Runtime" Private="false">
             <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Il2CppFishNet.Runtime.dll</HintPath>
         </Reference>
@@ -27,17 +45,22 @@
         <Reference Include="Il2Cppmscorlib" Private="false">
             <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
         </Reference>
-        <Reference Include="UnityEngine.CoreModule" Private="false">
-            <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+    </ItemGroup>
+
+    <!-- Mono-only references -->
+    <ItemGroup Condition="'$(Configuration)' == 'Mono'">
+        <Reference Include="FishNet.Runtime" Private="false">
+            <HintPath>$(ScheduleIDir)\Schedule I_Data\Managed\FishNet.Runtime.dll</HintPath>
         </Reference>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.4"/>
     </ItemGroup>
 
     <!-- Auto-deploy to game Mods folder on build -->
     <Target Name="CopyToMods" AfterTargets="Build">
-        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ScheduleIDir)\Mods\" />
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ScheduleIDir)\Mods\"/>
     </Target>
+
 </Project>

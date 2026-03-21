@@ -1,5 +1,17 @@
 <Project>
     <PropertyGroup>
-        <ScheduleIDir>C:\path\to\steam\steamapps\common\Schedule I</ScheduleIDir>
+        <!-- Set this to your Schedule I installation directory -->
+        <ScheduleIDir>C:\Program Files (x86)\Steam\steamapps\common\Schedule I</ScheduleIDir>
+
+        <!--
+            MelonLoader stores its own DLLs in net6 (IL2CPP) or net35 (Mono).
+            Game assemblies live in different places per backend.
+            Adjust these if your layout differs.
+        -->
+        <MelonNetDir Condition="'$(Configuration)' == 'Mono'">net35</MelonNetDir>
+        <MelonNetDir Condition="'$(Configuration)' != 'Mono'">net6</MelonNetDir>
+
+        <AssembliesDir Condition="'$(Configuration)' == 'Mono'">Schedule I_Data\Managed</AssembliesDir>
+        <AssembliesDir Condition="'$(Configuration)' != 'Mono'">MelonLoader\Il2CppAssemblies</AssembliesDir>
     </PropertyGroup>
 </Project>
