@@ -6,13 +6,12 @@
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
-    <!-- IL2CPP builds (Debug is also IL2CPP) -->
+    <!-- IL2CPP targets .NET 6, Mono targets .NET Standard 2.1 -->
     <PropertyGroup Condition="'$(Configuration)' == 'IL2CPP' Or '$(Configuration)' == 'Debug'">
         <TargetFramework>net6.0</TargetFramework>
         <DefineConstants>$(DefineConstants);IL2CPP</DefineConstants>
     </PropertyGroup>
 
-    <!-- Mono build -->
     <PropertyGroup Condition="'$(Configuration)' == 'Mono'">
         <TargetFramework>netstandard2.1</TargetFramework>
         <DefineConstants>$(DefineConstants);MONO</DefineConstants>
@@ -29,26 +28,29 @@
         <Reference Include="UnityEngine.CoreModule" Private="false">
             <HintPath>$(ScheduleIDir)\$(AssembliesDir)\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
-        <Reference Include="Assembly-CSharp" Private="false">
-            <HintPath>$(ScheduleIDir)\$(AssembliesDir)\Assembly-CSharp.dll</HintPath>
-        </Reference>
     </ItemGroup>
 
     <!-- IL2CPP-only references -->
     <ItemGroup Condition="'$(Configuration)' == 'IL2CPP' Or '$(Configuration)' == 'Debug'">
+        <Reference Include="Assembly-CSharp" Private="false">
+            <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+        </Reference>
         <Reference Include="Il2CppFishNet.Runtime" Private="false">
             <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Il2CppFishNet.Runtime.dll</HintPath>
         </Reference>
         <Reference Include="Il2CppInterop.Runtime" Private="false">
-            <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Il2CppInterop.Runtime.dll</HintPath>
+            <HintPath>$(ScheduleIDir)\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
         </Reference>
         <Reference Include="Il2Cppmscorlib" Private="false">
             <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
         </Reference>
     </ItemGroup>
 
-    <!-- Mono-only references -->
+    <!-- Mono-only references (Publicize to access private setters) -->
     <ItemGroup Condition="'$(Configuration)' == 'Mono'">
+        <Reference Include="Assembly-CSharp" Private="false">
+            <HintPath>$(ScheduleIDir)\Schedule I_Data\Managed\Assembly-CSharp.dll</HintPath>
+        </Reference>
         <Reference Include="FishNet.Runtime" Private="false">
             <HintPath>$(ScheduleIDir)\Schedule I_Data\Managed\FishNet.Runtime.dll</HintPath>
         </Reference>
