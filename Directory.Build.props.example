@@ -1,0 +1,5 @@
+<Project>
+    <PropertyGroup>
+        <ScheduleIDir>C:\path\to\steam\steamapps\common\Schedule I</ScheduleIDir>
+    </PropertyGroup>
+</Project>

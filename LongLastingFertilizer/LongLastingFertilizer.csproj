@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>LongLastingFertilizer</AssemblyName>
+        <RootNamespace>LongLastingFertilizer</RootNamespace>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="0Harmony" Private="false">
+            <HintPath>$(ScheduleIDir)\MelonLoader\net6\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="MelonLoader" Private="false">
+            <HintPath>$(ScheduleIDir)\MelonLoader\net6\MelonLoader.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp" Private="false">
+            <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppFishNet.Runtime" Private="false">
+            <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Il2CppFishNet.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppInterop.Runtime" Private="false">
+            <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Il2CppInterop.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2Cppmscorlib" Private="false">
+            <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule" Private="false">
+            <HintPath>$(ScheduleIDir)\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    </ItemGroup>
+
+    <!-- Auto-deploy to game Mods folder on build -->
+    <Target Name="CopyToMods" AfterTargets="Build">
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ScheduleIDir)\Mods\" />
+    </Target>
+</Project>
