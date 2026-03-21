@@ -7,11 +7,8 @@ using MelonLoader;
 namespace LongLastingFertilizer;
 
 public class Mod : MelonMod {
-  internal static Mod Instance { get; private set; }
-
   public override void OnInitializeMelon() {
-    Instance = this;
-    LoggerInstance.Msg("[LongLastingFertilizer] Initialized");
+    LoggerInstance.Msg("LongLastingFertilizer loaded.");
   }
 
   public override void OnApplicationQuit() {
