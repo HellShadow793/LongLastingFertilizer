@@ -1,0 +1,9 @@
+﻿{
+  "name": "LongLastingFertilizer",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/Sensanaty/LongLastingFertilizer",
+  "description": "Fertilizer effects persist across harvest cycles as long as soil has remaining uses",
+  "dependencies": [
+    "LavaGang-MelonLoader-0.7.0"
+  ]
+}
