@@ -40,7 +40,7 @@ internal static class Patch_Harvest {
 #endif
       var id = PotHelper.GetId(__instance);
 
-      if (PotHelper.HasSoilRemaining(__instance) && PotHelper.HasAdditives(__instance)) {
+      if (__instance._remainingSoilUses > 1 && PotHelper.HasAdditives(__instance)) {
         FertilizerStore.CaptureState(__instance, id);
       }
       else {
